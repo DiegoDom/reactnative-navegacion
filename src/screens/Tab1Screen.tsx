@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { styles, colores } from '../theme/appTheme';
+import { styles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { TouchableIcon } from '../components/TouchableIcon';
 
 export const Tab1Screen = () => {
 
@@ -19,14 +19,14 @@ export const Tab1Screen = () => {
         }}>
             <Text style={styles.title}>Iconos</Text>
             <Text>
-                <Icon name="rocket-outline" size={80} color={ colores.primary } />
-                <Icon name="basketball-outline" size={80} color={ colores.primary } />
-                <Icon name="star-outline" size={80} color={ colores.primary } />
-                <Icon name="watch-outline" size={80} color={ colores.primary } />
-                <Icon name="settings-outline" size={80} color={ colores.primary } />
-                <Icon name="flame-outline" size={80} color={ colores.primary } />
-                <Icon name="cut-outline" size={80} color={ colores.primary } />
-                <Icon name="beer-outline" size={80} color={ colores.primary } />
+                <TouchableIcon iconName="rocket-outline"/>
+                <TouchableIcon iconName="basketball-outline"/>
+                <TouchableIcon iconName="star-outline"/>
+                <TouchableIcon iconName="watch-outline"/>
+                <TouchableIcon iconName="settings-outline"/>
+                <TouchableIcon iconName="flame-outline"/>
+                <TouchableIcon iconName="cut-outline"/>
+                <TouchableIcon iconName="beer-outline"/>
             </Text>
         </View>
     );
