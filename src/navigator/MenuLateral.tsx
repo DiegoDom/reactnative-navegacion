@@ -2,6 +2,7 @@ import React from 'react';
 import { useWindowDimensions, Image, View, TouchableOpacity, Text } from 'react-native';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
 // import { StackNavigator } from './StackNavigator';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { SettingsScreen } from '../screens/SettingsScreen';
 import { styles } from '../theme/appTheme';
 import { Tabs } from './Tabs';
@@ -39,13 +40,17 @@ const MenuInterno = ({ navigation }: DrawerContentComponentProps) => {
                     style={ styles.menuButton }
                     onPress={() => navigation.navigate('Tabs')}
                 >
-                    <Text style={ styles.menuItem } >Navegación</Text>
+                    <Text style={styles.menuItem} >
+                        <Icon name="compass-outline" size={20} color="black" /> Navegación
+                    </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={ styles.menuButton }
                     onPress={() => navigation.navigate('SettingsScreen')}
                 >
-                    <Text style={ styles.menuItem }>Ajustes</Text>
+                    <Text style={styles.menuItem}>
+                        <Icon name="settings-outline" size={20} color="black" /> Ajustes
+                    </Text>
                 </TouchableOpacity>
             </View>
         </DrawerContentScrollView>

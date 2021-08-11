@@ -1,17 +1,22 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Tab1Screen } from '../screens/Tab1Screen';
-import { Tab2Screen } from '../screens/Tab2Screen';
-// import { Tab3Screen } from '../screens/Tab3Screen';
 import { StackNavigator } from './StackNavigator';
 import { colores } from '../theme/appTheme';
-import { Text } from 'react-native';
-
-const Tab = createBottomTabNavigator();
+import { TopTapNavigator } from './TopTapNavigator';
 
 export const Tabs = () => {
+    return Platform.OS === 'ios' ? <TabsIOS /> : <TabsAndroid />;
+};
+
+const BottomTabIOS = createBottomTabNavigator();
+
+const TabsIOS = () => {
     return (
-        <Tab.Navigator
+        <BottomTabIOS.Navigator
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarActiveTintColor: colores.primary,
@@ -23,36 +28,64 @@ export const Tabs = () => {
                 tabBarLabelStyle: {
                     fontSize: 15
                 },
-                tabBarIcon: ({ color }) => {
-                    let iconName: string = 'T';
+                tabBarIcon: ({ color, size }) => {
+                    let iconName: string = 'alert-outline';
                     switch (route.name) {
                         case 'Tab1Screen':
-                            iconName = 'T1';
+                            iconName = 'square-outline';
                             break;
                         case 'Tab2Screen':
-                            iconName = 'T2';
+                            iconName = 'layers-outline';
                             break;
                         case 'StackNavigator':
-                            iconName = 'ST';
+                            iconName = 'layers-outline';
                         break;
                     }
-
-                    return <Text style={{ color }}>{iconName}</Text>;
+                    return <Icon name={ iconName } size={ size } color={ color } />;
                 }
             })}
             sceneContainerStyle={{
                 backgroundColor: 'white'
             }}
         >
-            <Tab.Screen name="Tab1Screen" options={{ title: 'Tab1' }} component={Tab1Screen} />
-            <Tab.Screen name="Tab2Screen" options={{ title: 'Tab2' }} component={Tab2Screen} />
-            <Tab.Screen name="StackNavigator" options={{ title: 'Stack'}} component={StackNavigator} />
-        </Tab.Navigator>
+            <BottomTabIOS.Screen name="Tab1Screen" options={{ title: 'Tab1' }} component={Tab1Screen} />
+            <BottomTabIOS.Screen name="Tab2Screen" options={{ title: 'Tab2' }} component={TopTapNavigator} />
+            <BottomTabIOS.Screen name="StackNavigator" options={{ title: 'Stack'}} component={StackNavigator} />
+        </BottomTabIOS.Navigator>
     );
 };
 
 
-/*  <Tab.Screen name="Tab1Screen" options={{
-                title: 'Tab1',
-                tabBarIcon: (props) => <Text style={{ color: props.color }} >T1</Text>
-            }} component={Tab1Screen} /> */
+const BottomTabAndroid = createMaterialBottomTabNavigator();
+
+const TabsAndroid = () => {
+    return (
+        <BottomTabAndroid.Navigator
+            sceneAnimationEnabled={true}
+            barStyle={{
+                backgroundColor: colores.primary
+            }}
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ color }) => {
+                    let iconName: string = 'alert-outline';
+                    switch (route.name) {
+                        case 'Tab1Screen':
+                            iconName = 'square-outline';
+                            break;
+                        case 'Tab2Screen':
+                            iconName = 'layers-outline';
+                            break;
+                        case 'StackNavigator':
+                            iconName = 'layers-outline';
+                        break;
+                    }
+                    return <Icon name={ iconName } size={ 15 } color={ color } />;
+                }
+            })}
+        >
+            <BottomTabAndroid.Screen name="Tab1Screen" options={{ title: 'Tab1' }} component={Tab1Screen} />
+            <BottomTabAndroid.Screen name="Tab2Screen" options={{ title: 'Tab2' }} component={TopTapNavigator} />
+            <BottomTabAndroid.Screen name="StackNavigator" options={{ title: 'Stack'}} component={StackNavigator} />
+        </BottomTabAndroid.Navigator>
+    );
+};
